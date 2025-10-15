@@ -1,0 +1,41 @@
+#app {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-gap: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.row {
+    display: grid;
+    grid-gap: 5px;
+}
+
+.row div {
+    outline: 1px solid;
+    height: 100%;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: bold;
+    vertical-align: middle;
+    box-sizing: border-box;
+    text-transform: uppercase;
+}
+
+div[data-state="present"] {
+    background-color: yellow;
+}
+
+div[data-state="correct"] {
+    background-color: green;
+}
+
+div[data-state="incorrect"] {
+    background-color: gray;
+}
+
+
