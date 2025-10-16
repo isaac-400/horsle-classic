@@ -5,12 +5,17 @@ const State = Object.freeze({
 });
 
 const Horse = "HORSE"
-
 const rows = document.getElementById("board").getElementsByClassName("row")
+const keys = document.getElementsByClassName("key")
+
 let rowIdx = 0;
 let slotIdx = 0;
+let gameOver = false
 
 function handleKeyEvent (event) {
+    if (gameOver) {
+        return
+    }
     if (event.defaultPrevented) {
         return; // Do nothing if the event was already processed
     }
@@ -49,33 +54,36 @@ function handleKeyEvent (event) {
 function Submit(row){
     let slots = row.getElementsByTagName("div")
     let word = ""
+    
     for (var i = 0; i < 5; i++) {
         s = slots[i]
         word += s.innerText
         s.classList.add("flipping")
         if (Horse[i] == s.innerText) {
-            s.setAttribute("data-state", State.CORRECT)
+            setAttrTimeout(s, State.CORRECT, i)
         } else if (Horse.includes(s.innerText)) {
-            s.setAttribute("data-state", State.PRESENT)
+            setAttrTimeout(s, State.PRESENT, i)
         } else {
-            s.setAttribute("data-state", State.INCORRECT)      
-        }
-        console.log(s.style)
-        
+            setAttrTimeout(s, State.INCORRECT, i)
+        }        
     }
 
     if (word == Horse) {
         console.log("You win!")
-        window.removeEventListener("keydown", handleKeyEvent)
-        
+        gameOver = true
+           
     }
+}
+
+function setAttrTimeout(s, state, i) {
+    const baseTimeout = 500
+    const delay = 100
+    setTimeout(()=> {s.setAttribute("data-state", state)}, baseTimeout + delay * i )
 }
 
 // Register the Keyboard handler
 window.addEventListener("keydown", handleKeyEvent)
 
-const keys = document.getElementsByClassName("key")
-console.log(keys)
 Array.from(keys).forEach((key) => {
     key.addEventListener("click", (event) => {
         let letter = event.target.innerText

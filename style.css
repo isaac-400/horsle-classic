@@ -83,8 +83,6 @@ div[data-state="incorrect"] {
 
 .flipping {
     animation: flip 1s forwards ease-in-out;
-    transition: background-color linear 1s;
-    transition-delay: 500ms;
 }
 
 @keyframes flip {
