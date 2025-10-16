@@ -1,11 +1,11 @@
 body {
     font-family: serif;
-
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 #app {
-    justify-content: center;
-    align-items: center;
     margin: auto;
     width: 66%;
 }
