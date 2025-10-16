@@ -6,7 +6,7 @@ const State = Object.freeze({
 
 const Horse = "HORSE"
 
-const rows = document.getElementById("app").getElementsByClassName("row")
+const rows = document.getElementById("board").getElementsByClassName("row")
 let rowIdx = 0;
 let slotIdx = 0;
 
@@ -52,6 +52,7 @@ function Submit(row){
     for (var i = 0; i < 5; i++) {
         s = slots[i]
         word += s.innerText
+        s.classList.add("flipping")
         if (Horse[i] == s.innerText) {
             s.setAttribute("data-state", State.CORRECT)
         } else if (Horse.includes(s.innerText)) {
@@ -59,6 +60,8 @@ function Submit(row){
         } else {
             s.setAttribute("data-state", State.INCORRECT)      
         }
+        console.log(s.style)
+        
     }
 
     if (word == Horse) {
@@ -70,3 +73,19 @@ function Submit(row){
 
 // Register the Keyboard handler
 window.addEventListener("keydown", handleKeyEvent)
+
+const keys = document.getElementsByClassName("key")
+console.log(keys)
+Array.from(keys).forEach((key) => {
+    key.addEventListener("click", (event) => {
+        let letter = event.target.innerText
+        if (letter.length == 1) {
+            letter = letter.toLowerCase();
+        }
+        console.log(letter)
+        handleKeyEvent({
+            key: letter,
+            preventDefault: () => {},
+        })
+    });
+});
