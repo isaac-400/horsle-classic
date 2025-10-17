@@ -33,7 +33,8 @@ function handleKeyEvent(event) {
         slotIdx = 0;
       }
       break;
-    case "Backspace":
+  case "Backspace":
+  case "←":
       console.log(slotIdx);
       currentSlot.innerHTML = ""
       if (slotIdx > 0) {
