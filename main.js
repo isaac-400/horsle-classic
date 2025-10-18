@@ -22,8 +22,6 @@ function handleKeyEvent(event) {
     return; // Do nothing if the event was already processed
   }
   let slots = rows[rowIdx].getElementsByTagName("div")
-  let currentSlot = slots[slotIdx]
-  console.log(slotIdx);
   switch (event.key) {
     case "Enter":
       if (slotIdx == 5) {
@@ -36,16 +34,16 @@ function handleKeyEvent(event) {
   case "Backspace":
   case "←":
       console.log(slotIdx);
-      currentSlot.innerHTML = ""
       if (slotIdx > 0) {
         slotIdx -= 1;
       }
+      slots[slotIdx].innerHTML = ""
       break;
   default:
       console.log("KEY",event.key)
       if ("abcdefghijklmnopqrstuvwxyz".includes(event.key)) {
           if (slotIdx < 5) {
-              currentSlot.innerHTML = event.key
+              slots[slotIdx].innerHTML = event.key
               slotIdx += 1;
         }
       }
